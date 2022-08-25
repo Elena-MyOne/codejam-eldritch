@@ -205,7 +205,15 @@ const hardBlueCards = getSetCards(blueCardsData, 'hard');
 
 const allGreenCards = [...easyGreenCards, ...normalGreenCards, ...hardGreenCards];
 const allBrownCards = [...easyBrownCards, ...normalBrownCards, ...hardBrownCards];
-const allBlueCards = [...easyBlueCards, ...normalBlueCards, ...hardBlueCards]
+const allBlueCards = [...easyBlueCards, ...normalBlueCards, ...hardBlueCards];
+
+const noHardGreenCards = [...easyGreenCards, ...normalGreenCards];
+const noHardBrownCards = [...easyBrownCards, ...normalBrownCards];
+const noHardBlueCards = [...easyBlueCards, ...normalBlueCards];
+
+const noEasyGreenCards = [ ...normalGreenCards, ...hardGreenCards];
+const noEasyBrownCards = [ ...normalBrownCards, ...hardBrownCards];
+const noEasyBlueCards = [ ...normalBlueCards, ...hardBlueCards];
 
 let firstStage = [];
 let secondStage = [];
@@ -218,7 +226,7 @@ function setCardsLevel() {
    }
    if (level === 'easy') {
       console.log("it's easy " + ancient)
-      orderCards(ancient, easyGreenCards, easyBrownCards, easyBlueCards, normalBrownCards, normalGreenCards);
+      orderCards(ancient, noHardGreenCards, noHardBrownCards, noHardBlueCards, noHardBrownCards, noHardGreenCards);
    }
    if (level === 'normal') {
       console.log("it's normal " + ancient)
@@ -226,7 +234,7 @@ function setCardsLevel() {
    }
    if (level === 'hard') {
       console.log("it's hard " + ancient)
-      orderCards(ancient, normalGreenCards, hardBrownCards, normalBlueCards, normalBrownCards, hardGreenCards);
+      orderCards(ancient, noEasyGreenCards, noEasyBrownCards, noEasyBlueCards, noEasyBrownCards, noEasyGreenCards);
    }
    if (level === 'expert') {
       console.log("it's expert " + ancient)
@@ -239,7 +247,7 @@ console.log(hardGreenCards)
 console.log(hardBrownCards)
 console.log(hardBlueCards)
 
-function orderCards(ancient, greenSet, brownSet, blueSet, brownSet2, greenSet2, blueSet2) {
+function orderCards(ancient, greenSet, brownSet, blueSet, brownSet2, greenSet2) {
    let greenRes = shuffle(greenSet);
    let greenResPlus = shuffle(greenSet2);
    let brawnRes = shuffle(brownSet);
@@ -247,6 +255,9 @@ function orderCards(ancient, greenSet, brownSet, blueSet, brownSet2, greenSet2, 
    let blueRes = shuffle(blueSet);
 
    if (ancient === 'azathoth') {
+      firstStage = [];
+      secondStage = [];
+      thirdStage = [];
       firstStage.push(['green', greenRes.pop()]);
       firstStage.push(['brown', brawnRes.pop()], ['brown', brawnRes.pop()]);
       firstStage.push(['blue', blueRes.pop()]);
@@ -260,6 +271,9 @@ function orderCards(ancient, greenSet, brownSet, blueSet, brownSet2, greenSet2, 
    }
 
    if (ancient === 'cthulhu') {
+      firstStage = [];
+      secondStage = [];
+      thirdStage = [];
       firstStage.push(['brown', brawnRes.pop()], ['brown', brawnRes.pop()]);
       firstStage.push(['blue', blueRes.pop()], ['blue', blueRes.pop()]);
 
@@ -271,6 +285,9 @@ function orderCards(ancient, greenSet, brownSet, blueSet, brownSet2, greenSet2, 
    }
 
    if (ancient === 'iogSothoth') {
+      firstStage = [];
+      secondStage = [];
+      thirdStage = [];
       firstStage.push(['brown', brawnRes.pop()], ['brown', brawnRes.pop()]);
       firstStage.push(['blue', blueRes.pop()]);
 
@@ -283,6 +300,9 @@ function orderCards(ancient, greenSet, brownSet, blueSet, brownSet2, greenSet2, 
    }
 
    if (ancient === 'shubNiggurath') {
+      firstStage = [];
+      secondStage = [];
+      thirdStage = [];
       firstStage.push(['green', greenRes.pop()]);
       firstStage.push(['brown', brawnRes.pop()], ['brown', brawnRes.pop()]);
       firstStage.push(['blue', blueRes.pop()]);
