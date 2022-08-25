@@ -1,5 +1,8 @@
 import difficulties from "./data/difficulties";
-import ancientsData from "./data/ancients"
+import ancientsData from "./data/ancients";
+import greenCardsData from './data/mythicCards/green';
+import brownCardsData from './data/mythicCards/brown'
+import blueCardsData from './data/mythicCards/blue';
 
 const ancientContainer = document.querySelector('.ancient-container');
 const azathoth = document.querySelector('.azathoth');
@@ -7,26 +10,30 @@ const cthulhu = document.querySelector('.cthulhu');
 const iogSothoth = document.querySelector('.iogSothoth');
 const shubNiggurath = document.querySelector('.shubNiggurath');
 
-const deckContainer = document.querySelector('.deck-container');
 const shuffleButton = document.querySelector('.shuffle-button');
 const game = document.querySelector('.game');
 
-let green1, green2, green3;
-let brown1, brown2, brown3;
-let blue1, blue2, blue3;
+const difficultyContainer = document.querySelector('.difficulty-container');
+
+let greenDot1, greenDot2, greenDot3;
+let brownDot1, brownDot2, brownDot3;
+let blueDot1, blueDot2, blueDot3;
+
+let level;
+let ancient;
 
 function setCards(index) {
-   green1 = ancientsData[index].firstStage.greenCards;
-   green2 = ancientsData[index].secondStage.greenCards;
-   green3 = ancientsData[index].thirdStage.greenCards;
+   greenDot1 = ancientsData[index].firstStage.greenCards;
+   greenDot2 = ancientsData[index].secondStage.greenCards;
+   greenDot3 = ancientsData[index].thirdStage.greenCards;
 
-   brown1 = ancientsData[index].firstStage.brownCards;
-   brown2 = ancientsData[index].secondStage.brownCards;
-   brown3 = ancientsData[index].thirdStage.brownCards;
+   brownDot1 = ancientsData[index].firstStage.brownCards;
+   brownDot2 = ancientsData[index].secondStage.brownCards;
+   brownDot3 = ancientsData[index].thirdStage.brownCards;
 
-   blue1 = ancientsData[index].firstStage.blueCards;
-   blue2 = ancientsData[index].secondStage.blueCards;
-   blue3 = ancientsData[index].thirdStage.blueCards;
+   blueDot1 = ancientsData[index].firstStage.blueCards;
+   blueDot2 = ancientsData[index].secondStage.blueCards;
+   blueDot3 = ancientsData[index].thirdStage.blueCards;
 }
 
 function toggleActiveAncient(elem) {
@@ -47,25 +54,28 @@ ancientContainer.addEventListener('click', (e) => {
       toggleActiveAncient(target)
       if (target === azathoth) {
          setCards(0);
-         console.log('azathoth')
+         ancient = 'azathoth';
+         console.log(ancient)
       }
       if (target === cthulhu) {
          setCards(1);
-         console.log('cthulhu')
+         ancient = 'cthulhu';
+         console.log(ancient)
       }
       if (target === iogSothoth) {
-         setCards(2)
-         console.log('iogSothoth')
+         setCards(2);
+         ancient = 'iogSothoth';
+         console.log(ancient)
       }
       if (target === shubNiggurath) {
-         setCards(3)
-         console.log('shubNiggurath')
+         setCards(3);
+         ancient = 'shubNiggurath';
+         console.log(ancient)
       }
    }
 })
 
 //difficulty-container==============================================================
-const difficultyContainer = document.querySelector('.difficulty-container');
 
 function showDifficulties() {
    return difficultyContainer.innerHTML = 
@@ -93,20 +103,26 @@ difficultyContainer.addEventListener('click', (e) => {
       toggleActiveDifficulty(target);
       showShuffleBtn();
       if (target.innerHTML === difficulties[0].name) {
-         console.log(difficulties[0].name)
+         level = difficulties[0].id
+         console.log(level)
       }
       if (target.innerHTML === difficulties[1].name) {
-         console.log(difficulties[1].name)
+         level = difficulties[1].id
+         console.log(level)
       }
       if (target.innerHTML === difficulties[2].name) {
-         console.log(difficulties[2].name)
+         level = difficulties[2].id
+         console.log(level)
       }
       if (target.innerHTML === difficulties[3].name) {
-         console.log(difficulties[3].name)
+         level = difficulties[3].id
+         console.log(level)
       }
       if (target.innerHTML === difficulties[4].name) {
-         console.log(difficulties[4].name)
+         level = difficulties[4].id
+         console.log(level)
       }
+      setCardsLevel()
    }
 })
 
@@ -129,37 +145,220 @@ function showCurrentStage() {
          <div class="stage-container">
             <div class="stage-text">First stage</div>
                <div class="dots-container">
-                  <div class="dot green">${green1}</div>
-                  <div class="dot brown">${brown1}</div>
-                  <div class="dot blue">${blue1}</div>
+                  <div class="dot green green1">${greenDot1}</div>
+                  <div class="dot brown brown1">${brownDot1}</div>
+                  <div class="dot blue blue1">${blueDot1}</div>
                </div>
          </div>
          <div class="stage-container">
             <div class="stage-text">Second stage</div>
                <div class="dots-container">
-                  <div class="dot green">${green2}</div>
-                  <div class="dot brown">${brown2}</div>
-                  <div class="dot blue">${blue2}</div>
+                  <div class="dot green green2">${greenDot2}</div>
+                  <div class="dot brown brown2">${brownDot2}</div>
+                  <div class="dot blue blue2">${blueDot2}</div>
                </div>
          </div>
          <div class="stage-container">
             <div class="stage-text">Third stage</div>
                <div class="dots-container">
-                  <div class="dot green">${green3}</div>
-                  <div class="dot brown">${brown3}</div>
-                  <div class="dot blue">${blue3}</div>
+                  <div class="dot green green3">${greenDot3}</div>
+                  <div class="dot brown brown3">${brownDot3}</div>
+                  <div class="dot blue blue3">${blueDot3}</div>
                </div>
          </div>
          <div class="deck"></div>
-         <div class="last-card"></div>
+         <div class="last-card hidden"></div>
       </div>
    `
+   showLastCard();
+   showOrderCards()
 }
 
 function hideCurrentStage() {
    game.innerHTML = ''
 }
 
-//   console.log('click')
-//end==============================================================
+//counter==============================================================
+function getSetCards(set, difficulty) {
+   return set.filter(item => {
+            if (item.difficulty === difficulty) {
+               return item.cardFace
+            }
+         }).map(item => item.id)
+}
+
+function shuffle(array) {
+   return array.sort(() => Math.random() - 0.5);
+}
+
+const easyGreenCards = getSetCards(greenCardsData, 'easy');
+const easyBrownCards = getSetCards(brownCardsData, 'easy');
+const easyBlueCards = getSetCards(blueCardsData, 'easy');
+
+const normalGreenCards = getSetCards(greenCardsData, 'normal');
+const normalBrownCards = getSetCards(brownCardsData, 'normal');
+const normalBlueCards = getSetCards(blueCardsData, 'normal');
+
+const hardGreenCards = getSetCards(greenCardsData, 'hard');
+const hardBrownCards = getSetCards(brownCardsData, 'hard');
+const hardBlueCards = getSetCards(blueCardsData, 'hard');
+
+const allGreenCards = [...easyGreenCards, ...normalGreenCards, ...hardGreenCards];
+const allBrownCards = [...easyBrownCards, ...normalBrownCards, ...hardBrownCards];
+const allBlueCards = [...easyBlueCards, ...normalBlueCards, ...hardBlueCards]
+
+let firstStage = [];
+let secondStage = [];
+let thirdStage = [];
+
+function setCardsLevel() {
+   if (level === 'simple') {
+      console.log("it's simple " + ancient);
+      orderCards(ancient, easyGreenCards, easyBrownCards, easyBlueCards, normalBrownCards, normalGreenCards);
+   }
+   if (level === 'easy') {
+      console.log("it's easy " + ancient)
+      orderCards(ancient, easyGreenCards, easyBrownCards, easyBlueCards, normalBrownCards, normalGreenCards);
+   }
+   if (level === 'normal') {
+      console.log("it's normal " + ancient)
+      orderCards(ancient, allGreenCards, allBrownCards, allBlueCards, allBrownCards, allGreenCards);
+   }
+   if (level === 'hard') {
+      console.log("it's hard " + ancient)
+      orderCards(ancient, normalGreenCards, hardBrownCards, normalBlueCards, normalBrownCards, hardGreenCards);
+   }
+   if (level === 'expert') {
+      console.log("it's expert " + ancient)
+      orderCards(ancient, hardGreenCards, hardBrownCards, hardBlueCards, normalBrownCards, normalGreenCards);
+   }
+}
+
+console.log(blueCardsData);
+console.log(hardGreenCards)
+console.log(hardBrownCards)
+console.log(hardBlueCards)
+
+function orderCards(ancient, greenSet, brownSet, blueSet, brownSet2, greenSet2, blueSet2) {
+   let greenRes = shuffle(greenSet);
+   let greenResPlus = shuffle(greenSet2);
+   let brawnRes = shuffle(brownSet);
+   let brawnResPlus = shuffle(brownSet2);
+   let blueRes = shuffle(blueSet);
+
+   if (ancient === 'azathoth') {
+      firstStage.push(['green', greenRes.pop()]);
+      firstStage.push(['brown', brawnRes.pop()], ['brown', brawnRes.pop()]);
+      firstStage.push(['blue', blueRes.pop()]);
+      
+      secondStage.push(['green', greenRes.pop()], ['green', greenRes.pop()]);
+      secondStage.push(['brown', brawnRes.pop()], ['brown', brawnRes.pop()], ['brown', brawnRes.pop()]);
+      secondStage.push(['blue', blueRes.pop()]);
+
+      thirdStage.push(['green', greenRes.pop()], ['green', greenRes.pop()]);
+      thirdStage.push(['brown', brawnResPlus.pop()], ['brown', brawnResPlus.pop()], ['brown', brawnResPlus.pop()], ['brown', brawnResPlus.pop()]);
+   }
+
+   if (ancient === 'cthulhu') {
+      firstStage.push(['brown', brawnRes.pop()], ['brown', brawnRes.pop()]);
+      firstStage.push(['blue', blueRes.pop()], ['blue', blueRes.pop()]);
+
+      secondStage.push(['green', greenRes.pop()]);
+      secondStage.push(['brown', brawnRes.pop()], ['brown', brawnRes.pop()], ['brown', brawnRes.pop()]);
+
+      thirdStage.push(['green', greenRes.pop()], ['green', greenRes.pop()], ['green', greenRes.pop()]);
+      thirdStage.push(['brown', brawnResPlus.pop()], ['brown', brawnResPlus.pop()], ['brown', brawnResPlus.pop()], ['brown', brawnResPlus.pop()]);
+   }
+
+   if (ancient === 'iogSothoth') {
+      firstStage.push(['brown', brawnRes.pop()], ['brown', brawnRes.pop()]);
+      firstStage.push(['blue', blueRes.pop()]);
+
+      secondStage.push(['green', greenRes.pop()], ['green', greenRes.pop()]);
+      secondStage.push(['brown', brawnRes.pop()], ['brown', brawnRes.pop()], ['brown', brawnRes.pop()]);
+      secondStage.push(['blue', blueRes.pop()]);
+
+      thirdStage.push(['green', greenRes.pop()], ['green', greenRes.pop()], ['green', greenRes.pop()]);
+      thirdStage.push(['brown', brawnResPlus.pop()], ['brown', brawnResPlus.pop()], ['brown', brawnResPlus.pop()], ['brown', brawnResPlus.pop()]);
+   }
+
+   if (ancient === 'shubNiggurath') {
+      firstStage.push(['green', greenRes.pop()]);
+      firstStage.push(['brown', brawnRes.pop()], ['brown', brawnRes.pop()]);
+      firstStage.push(['blue', blueRes.pop()]);
+
+      secondStage.push(['green', greenRes.pop()], ['green', greenRes.pop()], ['green', greenRes.pop()]);
+      secondStage.push(['brown', brawnRes.pop()], ['brown', brawnRes.pop()]);
+      secondStage.push(['blue', blueRes.pop()]);
+
+      thirdStage.push(['green', greenRes.pop()], ['green',  greenResPlus.pop()]);
+      thirdStage.push(['brown', brawnRes.pop()], ['brown', brawnResPlus.pop()], ['brown', brawnResPlus.pop()], ['brown', brawnResPlus.pop()]);
+   }
+
+   shuffle(firstStage);
+   shuffle(secondStage);
+   shuffle(thirdStage);
+
+
+   console.log(firstStage)
+   console.log(secondStage)
+   console.log(thirdStage)
+
+   // console.log(greenRes.length)
+   // console.log( greenResPlus.length)
+   // console.log(brawnRes.length)
+   // console.log(brawnResPlus.length)
+   // console.log(blueRes.length)
+   
+}
+
+function showLastCard() {
+   const deck = document.querySelector('.deck');
+   const lastCard = document.querySelector('.last-card');
+
+   deck.addEventListener('click', () => {
+      lastCard.classList.remove('hidden');
+   }, {'once': true})
+}
+
+function showOrderCards() {
+   const deck = document.querySelector('.deck');
+   const lastCard = document.querySelector('.last-card');
+
+   let allCards = [...firstStage, ...secondStage, ...thirdStage];
+
+   console.log(allCards)
+
+   let i = 0;
+
+   deck.addEventListener('click', () => {
+      if(i < allCards.length) {
+         lastCard.style.backgroundImage = `url(assets/MythicCards/${allCards[i][0]}/${allCards[i][1]}.png)`;
+      }
+
+      i = i + 1;
+   })
+}
+
+// function countStages(stage) {
+//    const green1 = document.querySelector('.green1');
+//    const green2 = document.querySelector('.green2');
+//    const green3 = document.querySelector('.green3');
+//    const brown1 = document.querySelector('.brown1');
+//    const brown2 = document.querySelector('.brown2');
+//    const brown3 = document.querySelector('.brown3');
+//    const blue1 = document.querySelector('.blue1');
+//    const blue2 = document.querySelector('.blue2');
+//    const blue3 = document.querySelector('.blue3');
+
+//    if (stage === firstStage) {
+
+//    }
+// }
+
+
+
+
+
+
 
