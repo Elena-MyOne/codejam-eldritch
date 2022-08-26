@@ -55,22 +55,18 @@ ancientContainer.addEventListener('click', (e) => {
       if (target === azathoth) {
          setCards(0);
          ancient = 'azathoth';
-         console.log(ancient)
       }
       if (target === cthulhu) {
          setCards(1);
          ancient = 'cthulhu';
-         console.log(ancient)
       }
       if (target === iogSothoth) {
          setCards(2);
          ancient = 'iogSothoth';
-         console.log(ancient)
       }
       if (target === shubNiggurath) {
          setCards(3);
          ancient = 'shubNiggurath';
-         console.log(ancient)
       }
    }
 })
@@ -104,23 +100,18 @@ difficultyContainer.addEventListener('click', (e) => {
       showShuffleBtn();
       if (target.innerHTML === difficulties[0].name) {
          level = difficulties[0].id
-         console.log(level)
       }
       if (target.innerHTML === difficulties[1].name) {
          level = difficulties[1].id
-         console.log(level)
       }
       if (target.innerHTML === difficulties[2].name) {
          level = difficulties[2].id
-         console.log(level)
       }
       if (target.innerHTML === difficulties[3].name) {
          level = difficulties[3].id
-         console.log(level)
       }
       if (target.innerHTML === difficulties[4].name) {
          level = difficulties[4].id
-         console.log(level)
       }
       setCardsLevel()
    }
@@ -224,31 +215,21 @@ let allCards = [];
 
 function setCardsLevel() {
    if (level === 'simple') {
-      console.log("it's simple " + ancient);
       orderCards(ancient, easyGreenCards, easyBrownCards, easyBlueCards, normalBrownCards, normalGreenCards);
    }
    if (level === 'easy') {
-      console.log("it's easy " + ancient)
       orderCards(ancient, noHardGreenCards, noHardBrownCards, noHardBlueCards, noHardBrownCards, noHardGreenCards);
    }
    if (level === 'normal') {
-      console.log("it's normal " + ancient)
       orderCards(ancient, allGreenCards, allBrownCards, allBlueCards, allBrownCards, allGreenCards);
    }
    if (level === 'hard') {
-      console.log("it's hard " + ancient)
       orderCards(ancient, noEasyGreenCards, noEasyBrownCards, noEasyBlueCards, noEasyBrownCards, noEasyGreenCards);
    }
    if (level === 'expert') {
-      console.log("it's expert " + ancient)
       orderCards(ancient, hardGreenCards, hardBrownCards, hardBlueCards, normalBrownCards, normalGreenCards);
    }
 }
-
-console.log(blueCardsData);
-console.log(hardGreenCards)
-console.log(hardBrownCards)
-console.log(hardBlueCards)
 
 function orderCards(ancient, greenSet, brownSet, blueSet, brownSet2, greenSet2) {
    let greenRes = shuffle(greenSet);
@@ -320,13 +301,7 @@ function orderCards(ancient, greenSet, brownSet, blueSet, brownSet2, greenSet2) 
 
    shuffle(firstStage);
    shuffle(secondStage);
-   shuffle(thirdStage);
-
-
-   console.log(firstStage)
-   console.log(secondStage)
-   console.log(thirdStage)
-   
+   shuffle(thirdStage); 
 }
 
 function showLastCard() {
@@ -344,8 +319,6 @@ function showOrderCards() {
 
    allCards = [...firstStage, ...secondStage, ...thirdStage];
 
-   console.log(allCards)
-
    let i = 0;
 
    deck.addEventListener('click', () => {
@@ -360,7 +333,6 @@ function showOrderCards() {
 function countStages() {
 
    const deck = document.querySelector('.deck');
-   const lastCard = document.querySelector('.last-card');
    
    let i = 0;
 
@@ -369,9 +341,6 @@ function countStages() {
       runThroughStage(allCards, i)
 
       i = i + 1
-
-      console.log('i is ' + i)
-      
    })
 
 }
@@ -391,19 +360,16 @@ function runThroughStage(stage, i) {
       if (stage[i][0] === 'green'){
          let value = Number(green1.innerHTML) - 1;
          green1.innerHTML = value
-         console.log('value is ' + value)
       }
    
       if (stage[i][0] === 'brown'){
          let value = Number(brown1.innerHTML) - 1;
          brown1.innerHTML = value
-         console.log('value is ' + value)
       }
    
       if (stage[i][0] === 'blue'){
          let value = Number(blue1.innerHTML) - 1;
          blue1.innerHTML = value
-         console.log('value is ' + value)
       }
    }
 
@@ -411,19 +377,16 @@ function runThroughStage(stage, i) {
       if (stage[i][0] === 'green'){
          let value = Number(green2.innerHTML) - 1;
          green2.innerHTML = value
-         console.log('value is ' + value)
       }
    
       if (stage[i][0] === 'brown'){
          let value = Number(brown2.innerHTML) - 1;
          brown2.innerHTML = value
-         console.log('value is ' + value)
       }
    
       if (stage[i][0] === 'blue'){
          let value = Number(blue2.innerHTML) - 1;
          blue2.innerHTML = value
-         console.log('value is ' + value)
       }
    }
 
@@ -431,19 +394,16 @@ function runThroughStage(stage, i) {
       if (stage[i][0] === 'green'){
          let value = Number(green3.innerHTML) - 1;
          green3.innerHTML = value
-         console.log('value is ' + value)
       }
    
       if (stage[i][0] === 'brown'){
          let value = Number(brown3.innerHTML) - 1;
          brown3.innerHTML = value
-         console.log('value is ' + value)
       }
    
       if (stage[i][0] === 'blue'){
          let value = Number(blue3.innerHTML) - 1;
          blue3.innerHTML = value
-         console.log('value is ' + value)
       }
    }
 
