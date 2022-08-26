@@ -171,14 +171,15 @@ function showCurrentStage() {
       </div>
    `
    showLastCard();
-   showOrderCards()
+   showOrderCards();
+   countStages();
 }
 
 function hideCurrentStage() {
    game.innerHTML = ''
 }
 
-//counter==============================================================
+//shuffle==============================================================
 function getSetCards(set, difficulty) {
    return set.filter(item => {
             if (item.difficulty === difficulty) {
@@ -218,6 +219,8 @@ const noEasyBlueCards = [ ...normalBlueCards, ...hardBlueCards];
 let firstStage = [];
 let secondStage = [];
 let thirdStage = [];
+
+let allCards = [];
 
 function setCardsLevel() {
    if (level === 'simple') {
@@ -323,12 +326,6 @@ function orderCards(ancient, greenSet, brownSet, blueSet, brownSet2, greenSet2) 
    console.log(firstStage)
    console.log(secondStage)
    console.log(thirdStage)
-
-   // console.log(greenRes.length)
-   // console.log( greenResPlus.length)
-   // console.log(brawnRes.length)
-   // console.log(brawnResPlus.length)
-   // console.log(blueRes.length)
    
 }
 
@@ -345,7 +342,7 @@ function showOrderCards() {
    const deck = document.querySelector('.deck');
    const lastCard = document.querySelector('.last-card');
 
-   let allCards = [...firstStage, ...secondStage, ...thirdStage];
+   allCards = [...firstStage, ...secondStage, ...thirdStage];
 
    console.log(allCards)
 
@@ -360,25 +357,94 @@ function showOrderCards() {
    })
 }
 
-// function countStages(stage) {
-//    const green1 = document.querySelector('.green1');
-//    const green2 = document.querySelector('.green2');
-//    const green3 = document.querySelector('.green3');
-//    const brown1 = document.querySelector('.brown1');
-//    const brown2 = document.querySelector('.brown2');
-//    const brown3 = document.querySelector('.brown3');
-//    const blue1 = document.querySelector('.blue1');
-//    const blue2 = document.querySelector('.blue2');
-//    const blue3 = document.querySelector('.blue3');
+function countStages() {
 
-//    if (stage === firstStage) {
+   const deck = document.querySelector('.deck');
+   const lastCard = document.querySelector('.last-card');
+   
+   let i = 0;
 
-//    }
-// }
+   deck.addEventListener('click', () => {
 
+      runThroughStage(allCards, i)
 
+      i = i + 1
 
+      console.log('i is ' + i)
+      
+   })
 
+}
 
+function runThroughStage(stage, i) {
+   const green1 = document.querySelector('.green1');
+   const green2 = document.querySelector('.green2');
+   const green3 = document.querySelector('.green3');
+   const brown1 = document.querySelector('.brown1');
+   const brown2 = document.querySelector('.brown2');
+   const brown3 = document.querySelector('.brown3');
+   const blue1 = document.querySelector('.blue1');
+   const blue2 = document.querySelector('.blue2');
+   const blue3 = document.querySelector('.blue3');
 
+   if(i < firstStage.length) {
+      if (stage[i][0] === 'green'){
+         let value = Number(green1.innerHTML) - 1;
+         green1.innerHTML = value
+         console.log('value is ' + value)
+      }
+   
+      if (stage[i][0] === 'brown'){
+         let value = Number(brown1.innerHTML) - 1;
+         brown1.innerHTML = value
+         console.log('value is ' + value)
+      }
+   
+      if (stage[i][0] === 'blue'){
+         let value = Number(blue1.innerHTML) - 1;
+         blue1.innerHTML = value
+         console.log('value is ' + value)
+      }
+   }
 
+   if(i >= firstStage.length &&  i < (firstStage.length + secondStage.length)) {
+      if (stage[i][0] === 'green'){
+         let value = Number(green2.innerHTML) - 1;
+         green2.innerHTML = value
+         console.log('value is ' + value)
+      }
+   
+      if (stage[i][0] === 'brown'){
+         let value = Number(brown2.innerHTML) - 1;
+         brown2.innerHTML = value
+         console.log('value is ' + value)
+      }
+   
+      if (stage[i][0] === 'blue'){
+         let value = Number(blue2.innerHTML) - 1;
+         blue2.innerHTML = value
+         console.log('value is ' + value)
+      }
+   }
+
+   if(i >= (firstStage.length + secondStage.length) &&  i < (firstStage.length + secondStage.length + thirdStage.length)) {
+      if (stage[i][0] === 'green'){
+         let value = Number(green3.innerHTML) - 1;
+         green3.innerHTML = value
+         console.log('value is ' + value)
+      }
+   
+      if (stage[i][0] === 'brown'){
+         let value = Number(brown3.innerHTML) - 1;
+         brown3.innerHTML = value
+         console.log('value is ' + value)
+      }
+   
+      if (stage[i][0] === 'blue'){
+         let value = Number(blue3.innerHTML) - 1;
+         blue3.innerHTML = value
+         console.log('value is ' + value)
+      }
+   }
+
+}
