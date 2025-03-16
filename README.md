@@ -1,135 +1,88 @@
 # Eldritch Horror Codejam
 
-## Описание проекта
-В рамках данного CodeJam необходимо будет создать небольшое приложение-хелпер для настольной игры "Древний Ужас"
+## Project Description
+This CodeJam will require you to create a small helper application for the board game "Ancient Horror"
 
-## Ключевые навыки:
-- создание сложного алгоритма замешивания колоды
+## Key Skills:
+- creating a complex algorithm for shuffling a deck
 
-## Синопсис и условия алгоритма
-Многие любители настольных игр слышали про Древний ужас как одно из интереснейших настольных приключений, однако есть одна сложность: подготовка к игре для неопытных игроков занимает от 40 минут до часа времени и одно из самых сложных условий это составление колоды мифов
+## Synopsis and conditions of the algorithm
+Many board game lovers have heard of Ancient Horror as one of the most interesting board adventures, but there is one difficulty: preparation for the game for inexperienced players takes from 40 minutes to an hour of time and one of the most difficult conditions is compiling a deck of myths
 
-Для сборки колоды мифов используется три разных типа карт: синие, коричневые и зеленые (тип определяется по цвету полосы в шапке карты)
-Кроме того есть разная сложность карт:
-1. сложные карты имеют щупальцы вокруг название как на Синей карте в пример
-2. обычные карты не умеют никаких знаков как Коричневая карта в примере
-3. Легкие карты имеют изображение снежинок вокруг названия как зеленая карта в примере
+Three different types of cards are used to assemble the myth deck: blue, brown and green (the type is determined by the color of the stripe in the card header)
+In addition, there are different card difficulties:
+1. complex cards have tentacles around the name like on the Blue card for example
+2. regular cards can't do any signs like the Brown card in the example
+3. Light cards have snowflakes around the title like the green card in the example.
 
-Примеры карт:
+Examples:
 
 ![Синяя карта](https://github.com/Luffi2539/eldritch-codejam/blob/main/assets/MythicCards/blue/blue2.png?raw=true)
 ![Коричневая карта](https://github.com/Luffi2539/eldritch-codejam/blob/main/assets/MythicCards/brown/brown1.png?raw=true)
 ![Зеленая карта](https://github.com/Luffi2539/eldritch-codejam/blob/main/assets/MythicCards/green/green1.png?raw=true)
 
-Вам будут предоставлены заранее подготовленные ассеты карт а также файлы с данными этих карт
+You will be provided with pre-prepared card assets as well as files with the data of these cards.
 
-На первом этапе игроку будет необходимо выбрать Древнего который укажет схему колоды и сколько карт какого цвета необходимо на каждом этапе игры
+At the first stage, the player will need to choose an Ancient One who will indicate the deck layout and how many cards of what color are needed at each stage of the game.
 
-Пример карты Древнего:
+Example of Ancient Card:
 
 ![Древний](https://user-images.githubusercontent.com/43149261/172723651-a9c7e003-96b7-44e4-944a-54ad12755fbd.png)
 
-Состав карт необходимый для игры считается по сумме карт разных цветов на все 3 этапа
-Исходя из примера понадобится:
-Зеленых карт: 5
-Синих карт: 2
-Коричневых карт: 9
+The composition of cards required for the game is calculated by the sum of cards of different colors for all 3 stages
+Based on the example, you will need:
+Green cards: 5
+Blue cards: 2
+Brown cards: 9
 
-Далее необходимо будет определить сложность игры:
+Next, you will need to determine the difficulty of the game:
 
-Из общего набора карт необходимо будет выбрать карты согласно выбранной сложности:
+From the general set of cards, you will need to select cards according to the selected difficulty:
 
-# Очень легкий уровень сложности: из набора берутся все карты со снежинками, если карт не хватает то добираются обычные карты
-# Легкий уровень сложности: из набора убираются карты с щупальцами
-# Средний уровень сложности: набор остается нетронутым
-# Высокий уровень сложности: из набора убираются карты со снежинками
-# Очень высокий уровень сложности: из набора берутся все карты со щупальцами, если карт не хватает то добираются обычные карты
+# Very easy difficulty level: all snowflake cards are taken from the set, if there are not enough cards, then regular cards are taken
+# Easy difficulty level: tentacle cards are removed from the set
+# Medium difficulty level: the set remains intact
+# High difficulty level: snowflake cards are removed from the set
+# Very high difficulty level: all tentacle cards are taken from the set, if there are not enough cards, then regular cards are taken
 
-Исходя из примера: Мы выбрали очень легкий уровень сложности и нам необходимо 9 коричневых карт, но всего во всем наборе только 5 коричневых карт со снежинкой, значит мы берем эти пять карт и дальше случайным образом выбираем 4 карты обычной сложности
+Based on the example: We have chosen a very easy difficulty level and we need 9 brown cards, but in the entire set there are only 5 brown cards with a snowflake, so we take these five cards and then randomly select 4 cards of normal difficulty
 
-После того как необходимое количество карт набрано мы должны создать миниколоды для каждого этапа.
-Для этого отобранные карты перемешиваются отдельно (должно получиться три маленькие колоды в которых будут расположены зеленые синие и коричневые карты соответственно в случайном порядке
+Once the required number of cards has been collected, we must create mini-decks for each stage. To do this, the selected cards are shuffled separately (you should get three small decks in which green, blue and brown cards will be located, respectively, in random order
 
-Затем необходимо из этих колод выбрать необходимое количество карт для каждого этапа:
-Исходя из примера:
+Then you need to select the required number of cards from these decks for each stage:
+Based on the example:
 
-Для Этапа 1 согласно схеме нам необходимы 1 зеленая, 2 коричневые и 1 синяя карта.
-Мы случайным образом выбираем 1 карту из миниколоды отобранных зеленых карт, 2 карты из коричневой колоды и 1 из синей, после чего полученные 4 карты перемешиваем
+For Stage 1, according to the diagram, we need 1 green, 2 brown and 1 blue card.
+We randomly select 1 card from the mini-deck of selected green cards, 2 cards from the brown deck and 1 from the blue, after which we shuffle the resulting 4 cards
 
-Повторяем данное действие для второго и третьего этапа в результате колоды изначально перемешанные по цветам превратятся в 3 колоды каждого из этапов
+We repeat this action for the second and third stages as a result, the decks initially shuffled by color will turn into 3 decks of each stage
 
-Далее положенные колоды необходимо положить друг на друга, чтобы карты из первого этапа входили в игру первыми, потом шли карты второго этапа и под конец карты третьего этапа
+Next, the laid decks must be placed on top of each other so that the cards from the first stage enter the game first, then the cards of the second stage and at the end the cards of the third stage
 
-Вырезка из правил игры о сборе колод (данная вырезка не включает в себя разделение по уровням сложности поэтому алгоритм немного отличается
+Cutting from the rules of the game about collecting decks (this cutting does not include division by difficulty levels, so the algorithm is slightly different
 ![image](https://user-images.githubusercontent.com/43149261/172725219-0d0c9f22-0594-4b4b-9a2b-ce4427c682ab.png)
 
-Демо готового проекта: [Демо](https://codejam-demo.herokuapp.com/)
+Demo of the finished project: [Демо](https://codejam-demo.herokuapp.com/)
 
-## Файлы для работы
-В ветке main данного репозитория можно найти 2 папки assets и data которые содержать полезные файлы и изображения для выполнения задания.
-Вы можете сделать форк данного репозитория чтобы потом спокойно скопировать себе файлы
+## Files for work
+In the main branch of this repository you can find 2 folders assets and data that contain useful files and images for completing the task.
+You can fork this repository so that you can easily copy the files to yourself later
 
-## Требования к верстке:
-Так как основная задача это алгорит а не верстка, то особых требований нет, повторять верстку из демо не обязательно вы вольны сами расположить элементы любым удобным для вас способом
+## Requirements for layout:
+Since the main task is the algorithm and not the layout, there are no special requirements, it is not necessary to repeat the layout from the demo, you are free to arrange the elements yourself in any way convenient for you
 
-## Технические требования
-1. На выбор предоставляется минимум одна карта древнего (максимум 4) +5-20 баллов(по 5 за каждого древнего)
-2. На выбор предоставляется несколько уровней сложности (максимум 5) +5-25 баллов(по 5 за каждый уровень сложности
-3. Карты замешиваются согласно правилам игры +40 баллов
-4. Есть трекер текущего состояния колоды +20 баллов
+## Technical requirements
+1. At least one ancient card is available to choose from (maximum 4) +5-20 points (5 for each ancient)
+2. Several difficulty levels are available to choose from (maximum 5) +5-25 points (5 for each difficulty level
+3. Cards are shuffled according to the rules of the game +40 points
+4. There is a tracker for the current state of the deck +20 points
 
-Максимальный балл за задание: 100 (105 потенциальных из которых 5 как поправка на проверяющих)
+Maximum score for the task: 100 (105 potential, of which 5 as an adjustment for the examiners)
 
-## Если задание очень сложное
-Как вы можете заметить максимальные баллы идут за замешивание колоды и за трекер. Если задание кажется очень сложным для вас
-выберите одного любого Древнего по желанию и замешивайте карты согласно обычному уровню сложности
-в этом случае вам не нужно будет делать реализацию выбора древнего, выбора сложности а нужно будет сделать один вариант замешивания для статичных условий
-Выбор Древнего и сложности это уже задание со звездочкой для тех кто хочет попробовать более сложный вариант задания
+## If the task is very difficult
+As you can see, the maximum points go for shuffling the deck and for the tracker. If the task seems very difficult for you
+choose any Ancient at will and shuffle the cards according to the usual difficulty level
+in this case, you will not need to implement the choice of the Ancient, the choice of difficulty, but you will need to make one version of shuffling for static conditions
+The choice of the Ancient and the difficulty is already a task with an asterisk for those who want to try a more difficult version of the task
 
-## Требования к репозиторию
-- задание выполняется в личном репозитории.
-- создайте свой личный приватный репозитоий с названием `codejam-eldritch`
 
-![image](https://user-images.githubusercontent.com/43149261/172828241-bb305422-e43c-4f90-876b-571874c3a7af.png)
-
-- в денб запуска кроссчека необходимо сделать репозиторий публичным чтобы была возможность деплоя на gh-pages и чтобы дать доступ проверяющим
-Для этого необходимо перейти в настройки репозитория и в основных настройках пролистать вних до настроек видимости
-
-![image](https://user-images.githubusercontent.com/43149261/172828407-e40746e9-b32b-424d-ad7a-f14a6a72dd3b.png)
-
-- если у вас не создаётся приватный репозиторий школы, задание можно выполнять в личном приватном репозитории
-- если у вас не создаётся приватный репозиторий школы, задание можно выполнять в личном приватном репозитории
-- для деплоя используйте `gh-pages`
-- если не можете для деплоя использовать `gh-pages`, используйте https://app.netlify.com/drop. Название страницы дайте по схеме: имя гитхаб аккаунта - название таска
-
-## Требования к коммитам
-- История коммитов должна отображать процесс разработки приложения.
-- [Названия коммитов дайте согласно гайдлайну](https://docs.rs.school/#/git-convention)
-
-## Требования к Pull Request
-- Название Pull Request дайте по названию задания
-- [Описание Pull Request дайте по схеме](https://docs.rs.school/#/pull-request-review-process?id=Требования-к-pull-request-pr)  
-**Мержить Pull Request из ветки разработки в ветку `main` не нужно**.
-
-## Чтобы получить баллы за задание необходимо: 
-- Выполнить задание \*
-- Засабмитить задание т.е. отправить его на проверку \**  
-- Если задание проверяется в ходе кросс-чека, проверить все присланные на проверку работы и засабмитить результаты проверки до дедлайна кросс-чека \***  
-
-\* *Весь код проекта вам необходимо написать самостоятельно, только так можно чему-то научиться.  
-Копирование чужого кода (`Ctrl + C`, `Ctrl + V`) на курсе запрещено.  
-\** *Засабмитить задание можно только до дедлайна таска, после дедлайна сабмит недоступен*  
-\*** *Сабмит результатов кросс-чек проверки доступен и после дедлайна кросс-чека, но на оценки проверяющего  и проверяемых не влияет*  
-
-## Как сабмитить задание
-После выдачи таска, но до наступления дедлайна зайдите в rs app https://app.rs.school/, выберите **Cross-Check: Submit**, в выпадающем списке выберите таск, в названии которого есть слово `codejam`, в поле **Solution URL** добавьте ссылку на задеплоенную версию созданного вами сайта, нажмите кнопку **Submit**.
-
-## Рекомендации по сабмиту
-- Засабмитить задание рекомендуется как можно раньше, как только в rs app появится такая возможность. После сабмита задание можно продолжать выполнять до самого дедлайна
-- Так как проект выполняется в приватном репозитории, сабмитить ссылку на репозиторий или pull request нет смысла - проверяющий его не увидит. Приватный репозиторий школы видите только вы сами, админы курса, и увидят ваши менторы, когда они появятся 
-- Убедитесь, что задеплоенная вами ссылка открывается в режиме инкогнито браузера
-- Сделайте скриншот засабмиченной ссылки и сохраняйте его у себя до старта кросс-чека. Если вам не придут работы на проверку, скриншот послужит доказательством, что вы вовремя засабмитили ссылку на работу. В таком случае вашу работу проверят в ходе апелляции
-
-## Проверка задания
-- форма проверки каждой части задания - кросс-чек
-- инструкция по проведению cross-check: https://docs.rs.school/#/cross-check-flow
